@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>朋友们</title>
+</head>
+<body>
+<script>
+    let age = 18;
+    const friends = [
+        {
+            name:'hh',
+            home:'江西',
+            college:'湖南工业大学'
+        },
+        {
+            name:'xx',
+            home:'河南'
+        },
+
+    ];
+    friends.push({
+        name:'zz',
+        home:'湖南'
+    })
+    const newFriends = friends;
+    newFriends.push({
+        name:'yy',
+        home:'西安'
+    })
+    // 栈 队列
+    newFriends.unshift({
+        name:'ww',
+        home:'上海'
+    })
+</script>
+</body>
+</html>
