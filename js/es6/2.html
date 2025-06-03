@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="friends"></ul>
+    <script>
+        // JSON 数组
+        // 数据
+        const friends = [
+            {name: "John", age: 30, isOnline: true},
+            {name: "Jane", age: 25, isOnline: false}
+        ]
+        // DOM 编程
+        const ul = document.getElementById('friends')
+        // 如果不需要index，for of 更语义化
+        // for(let friends of friends){
+        //         const friend = friends[i]
+        //         ul.innerHTML += `
+        //         <li>
+        //             ${friend.name} - ${friend.age} - ${friend.isOnline ? '在线' : '离线'}
+        //         </li>
+        //         `
+        // }
+        // es6 forEach 升级版
+        // 迭代器
+        ul.innerHTML=friends.map(friend =>
+            // console.log(friend)
+             `
+            <li>
+                ${friend.name} - ${friend.age} - ${friend.isOnline? '在线' : '离线'}
+            </li>
+            `
+        ).join('')
+    </script>
+</body>
+</html>
