@@ -39,3 +39,7 @@ table
         friends
     }
     - tr v-for 配合循环输出的业务
+
+## react 来自于FaceBook 适合大型应用
+- 创建react 应用
+    - npm init vite 初始化一个项目（请定位至lesson_ai/react）
