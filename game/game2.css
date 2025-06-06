@@ -1,0 +1,160 @@
+@layer utilities {
+    .content-auto {
+        content-visibility: auto;
+    }
+    .bubble-shadow {
+        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    }
+    .text-shadow {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    .game-gradient {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    .btn-hover {
+        transition: all 0.3s ease;
+    }
+    .btn-hover:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* 得分和升级动画 */
+@keyframes fadeUpAndOut {
+    0% { opacity: 1; transform: translate(-50%, -50%); }
+    100% { opacity: 0; transform: translate(-50%, -150%); }
+}
+
+.score-popup {
+    position: fixed;
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(255, 195, 0, 0.8);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    transform: translate(-50%, -50%);
+    z-index: 30;
+    animation: fadeUpAndOut 1s forwards;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.9; }
+}
+
+.level-up-msg {
+    position: fixed;
+    text-align: center;
+    font-size: 1.875rem;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(67, 97, 238, 0.9);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30;
+    animation: pulse 1.5s ease-in-out forwards;
+    pointer-events: none;
+}
+
+/* 胜利特效 */
+@keyframes confetti-fall {
+    0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background-color: #f00;
+    opacity: 0;
+    z-index: 40;
+    animation: confetti-fall 3s linear forwards;
+}
+
+/* 道具选择弹窗 */
+.powerup-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+
+.powerup-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 90%;
+    width: 400px;
+    text-align: center;
+}
+
+.powerup-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.powerup-option {
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+}
+
+.powerup-option:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.powerup-option.selected {
+    border: 3px solid #4361EE;
+    transform: scale(1.05);
+}
+
+/* 提示消息 */
+.hint-message {
+    position: fixed;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(251, 86, 7, 0.9);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30;
+    animation: pulse 1.5s ease-in-out forwards;
+    pointer-events: none;
+}
+
+/* 滚动条样式 */
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #00ffff, #ff00ff);
+    border-radius: 10px;
+}
