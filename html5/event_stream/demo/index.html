@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM流式输出演示</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 2rem;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        #output {
+            white-space: pre-wrap;
+            min-height: 200px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 1rem;
+            background-color: #fafafa;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LLM流式输出演示</h1>
+        <p>点击下方按钮，体验从大型语言模型获取流式输出：</p>
+        <button id="streamButton">开始流式输出</button>
+        <div id="output">输出内容将显示在这里...</div>
+    </div>
+
+    <script>
+        document.getElementById('streamButton').addEventListener('click', function() {
+            const outputDiv = document.getElementById('output');
+            outputDiv.textContent = '连接中...';
+
+            // 创建EventSource连接到服务器端的流式接口
+            // html5 事件流 给他支持SSE 的地址
+            // SSE Server Sent Events 服务器端推送事件
+            const eventSource = new EventSource('/sse');
+            
+            // 接收消息事件
+            eventSource.onmessage = function(event) {
+                // 将接收到的内容追加显示
+                outputDiv.textContent += '\n';
+
+                outputDiv.textContent += event.data + '\n';
+            };
+
+            // 错误处理
+            eventSource.onerror = function(err) {
+                console.error('EventSource failed:', err);
+                outputDiv.textContent += '\n\n发生错误，请刷新页面重试。';
+                eventSource.close();
+            };
+        });
+    </script>
+</body>
+</html>
