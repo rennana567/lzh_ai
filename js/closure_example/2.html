@@ -1,0 +1,26 @@
+<script>
+let obj = {
+    count:0,
+    inc:debounce(function(val){
+        console.log(this.count += val)
+        console.log(this.count)
+    },500)
+}
+
+obj.inc(1)
+console.log(obj.count);
+
+function debounce(fn,delay){
+    return function(args){
+        // 定时器返回ID
+        // fn 自由变量
+        // fn 对象
+        let _this = this;
+        clearTimeout(fn.id)
+        fn.id = setTimeout((function(){
+            // this 丢失问题
+            fn.call( _this,args)
+        }),delay)
+    }
+}
+</script>
