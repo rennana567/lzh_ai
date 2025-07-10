@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    const person = {
+        name:'Nicholas',
+        sayHello:function(){
+            // this 丢失
+            setTimeout(function(){
+                console.log(`Hello, my name is ${this.name}`)
+            },1000)
+        }
+    }
+    person.sayHello.bind(person)()
+
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Book(title, author, year){
+            // 对内 私有
+            // 对外
+            let _title = title; // _开始的变量私有变量 内部  有利于可读性的编程风格
+            let _author = author;
+            let _year = year;
+
+            function getFullTitle(){ // 私有
+                return `${_title}`;
+            }
+            this.getFullInfo = function(){ // 对外
+                return `${getFullTitle()} ,published in ${_year} by ${_author} in China`;
+            }
+            
+            this.getTitle = function(){ // 对外
+                return _title;
+            }
+            this.getAuthor = function(){ // 对外
+                return _author;
+            }
+            this.getYear = function(){ // 对外
+                return _year;
+            }
+
+            // 类的开发者，和类的使用者，可能是两拨人
+            this.updateYear = function(newYear){ // 对外
+                if(typeof newYear === 'number' && newYear > 0){
+                    _year = newYear;
+                }else{
+                    console.error('year must be a number and greater than 0');
+                }
+                
+                
+            }
+        }
+
+        let book = new Book('JavaScript高级程序设计', 'Nicholas C. Zakas', '2011')
+        console.log(book.getFullInfo())
+        console.log(book.updateYear(2012))
+        console.log(book.getFullInfo())
+        book._title = 'JavaScript高级程序设计2'
+        console.log(book.getFullInfo())
+        console.log(book._title)
+    </script>
+</body>
+</html>
