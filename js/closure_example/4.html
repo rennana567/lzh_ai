@@ -14,33 +14,34 @@
         console.log('ajax request' + content)
     }
 
-    let throttleAjax = throttle(ajax,200);
-
-    function throttle(fn,delay){
-        let last,// 上一次执行的时间
-        defterTimer;// timeout id
-        return function(args){
-            let that = this; // 闭包的应用场景
-            let _args = arguments;
-            let now = + new Date(); // 类型转换
-            if(last && now < last + delay){
-                clearTimeout(defterTimer);
-                defterTimer = setTimeout(function(){
-                    last = now;
-                    fn.apply(that,_args);
-                },delay)
+    
+  function throttle(fun, delay) {
+        let last=null, deferTimer=null
+        return function (args) {
+            let that = this
+            let _args = arguments
+            let now = +new Date()
+            if (last && now < last + delay) {
+                clearTimeout(deferTimer)
+                deferTimer = setTimeout(function () {
+                    
+                    fun.apply(that, _args)
+                    last = now
+                }, delay)
             }else {
-                last = now;
-                fn.apply(that,_args);
+                last = now
+                fun.apply(that,_args)
             }
-
         }
     }
 
-    let inputC =document.getElementById('inputC')
-    inputC.addEventListener('keyup',function(e){
+    let throttleAjax = throttle(ajax, 1000)
+
+    let inputc = document.getElementById('inputC')
+    inputc.addEventListener('keyup', function(e) {
         throttleAjax(e.target.value)
     })
+
 </script>
 </body>
 </html>
