@@ -5,7 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>微任务</title>
 </head>
+<style>
+    div{
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+    }
+</style>
 <body>
+    <div id="d1">nihao</div>
 <script>
     console.log('start')
     // 批量更新
@@ -17,6 +25,7 @@
         console.log('微任务：queueMicrotask')
     })
     console.log('end')
+    document.getElementById('d1').style.width = '500px'
 </script>
 </body>
 </html>
