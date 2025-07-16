@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="list"></div>
+    <script>
+        const items = [
+            {
+                id:1,
+                name:'泥猴',
+                hobby:'bananaaaaaaaa...'
+            },
+            {
+                id:2,
+                name:'泥猴2',
+                hobby:'bananaaaaaaaa...'
+            }
+        ]
+
+        const container = document.getElementById('list');
+        // const oDiv = document.createElement('div');
+        // 性能优化，文档碎片
+        const fragment = document.createDocumentFragment();
+
+        items.forEach(item =>{
+            const wrapper = document.createElement('div');
+            const title = document.createElement('h3');
+            const desc = document.createElement('p');
+            title.textContent = item.name;
+            desc.textContent = item.hobby;
+            wrapper.appendChild(title);
+            wrapper.appendChild(desc);
+            fragment.appendChild(wrapper);
+        })
+
+        // 批量挂载更新，减少重排重绘次数
+        container.appendChild(fragment);
+    </script>
+</body>
+</html>
