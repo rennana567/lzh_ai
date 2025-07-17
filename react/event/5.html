@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #menu{
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            padding: 20px;
+            background: #f2f2f2;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="toggleBtn">Toggle Menu</div>
+    <div id="menu">
+        <p>Menu Context</p>
+        <a href="http://www.baidu.com" id="closeInside">Don't closed</button>
+    </div>
+    <script>
+        const toggleBtn = document.getElementById('toggleBtn');
+        const menu = document.getElementById('menu');
+        const closeInside = document.getElementById('closeInside');
+
+        toggleBtn.addEventListener('click',function(e){
+            e.stopPropagation(); // 阻止事件冒泡
+            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+            console.log('none') // 触发元素
+        })
+
+        document.addEventListener('click',function(e){
+            menu.style.display = 'none';
+            console.log('none2') // 触发元素
+        })
+
+        closeInside.addEventListener('click',function(e){
+            e.preventDefault(); // 阻止默认行为
+            e.stopPropagation(); // 阻止事件冒泡
+            alert('Menu is closed')
+        })
+    </script>
+</body>
+</html>
