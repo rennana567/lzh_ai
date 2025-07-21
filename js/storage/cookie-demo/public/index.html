@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="particle-container" id="particleContainer"></div>
+    
+    <div class="container">
+        <h1>Cookie 状态管理</h1>
+        
+        <div id="app">
+            <section id="loginSection">
+                <form id="loginForm">
+                    <input type="text" id="username" placeholder="Username" required>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </section>
+            
+            <section id="welcomeSection">
+                <p>Welcome, <span id="userDisplay"></span></p>
+                <button id="logoutBtn">Logout</button>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // 粒子效果实现
+        document.addEventListener('DOMContentLoaded', function() {
+            const particleContainer = document.getElementById('particleContainer');
+            const containerWidth = window.innerWidth;
+            const containerHeight = window.innerHeight;
+            const particleCount = 30; // 粒子数量
+            
+            for (let i = 0; i < particleCount; i++) {
+                createParticle();
+            }
+            
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // 随机粒子大小
+                const size = Math.random() * 5 + 1;
+                
+                // 随机位置
+                const x = Math.random() * containerWidth;
+                const y = Math.random() * containerHeight;
+                
+                // 随机动画速度
+                const animationDuration = Math.random() * 10 + 10;
+                
+                // 随机延迟
+                const animationDelay = Math.random() * 5;
+                
+                // 设置粒子样式
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                particle.style.animationDuration = `${animationDuration}s`;
+                particle.style.animationDelay = `${animationDelay}s`;
+                
+                // 添加到容器
+                particleContainer.appendChild(particle);
+                
+                // 一段时间后重新定位粒子，实现持续运动效果
+                setTimeout(() => {
+                    particle.style.left = `${Math.random() * containerWidth}px`;
+                    particle.style.top = `${Math.random() * containerHeight}px`;
+                    createParticle(); // 重新创建一个粒子，保持数量稳定
+                }, animationDuration * 1000);
+            }
+            
+            // 窗口大小改变时重新计算粒子位置
+            window.addEventListener('resize', function() {
+                particleContainer.style.width = window.innerWidth + 'px';
+                particleContainer.style.height = window.innerHeight + 'px';
+            });
+        });
+    </script>
+    <script src="./script.js"></script>
+</body>
+</html>
