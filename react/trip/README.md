@@ -1,12 +1,102 @@
-# React + Vite
+# react 旅游 APP
+ReadMe.md 很重要 方便面试官
+- 移动App
+- 模仿App
+    - 喜欢的、国外的
+    - 有点改变
+- 绝大多数的考点
+    - 都适用于任何App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 技术栈
+- React 全家桶
+    React 组件开发
+    组件的封装
+    第三方组件库
+    受控和非受控
+    hooks编程 自定义
+    React-Router-DOM
+      SPA
+      路由守卫
+      懒加载
+    Zustand
+- mock 接口模拟
+- axios 请求拦截和代理
+- jwt 登录 
+- module css
+- vite 配置
+- 性能优化
+  防抖节流
+  useCallback useMemo...
+- css 预处理器 stylus
+    flex transition transform...
+- LLM
+  - chat
+  - 生图
+  - 语音
+  - coze 工作流 调用
+  - 流式输出
+- 移动端适配
+    rem
+- 单例模式
+- git 提交等编程风格
+## 项目的架构
+- components
+- pages
+- store
+- hooks
+- api
+- mock
 
-Currently, two official plugins are available:
+## 开发前的准备
+- 安装的包
+    react-router-dom zustand axios 
+      react-vant（UI组件库）
+    react-vant
+    开发期间的依赖
+    vite-plugin-mock jwt 
+- vite 配置
+  - alias
+  - mock
+  - .env.local
+      llm apiKey
+  - user-scalable=no
+  - css 预处理
+      index.css reset
+      box-sizing border-box  font-family:-apply-system
+      App.css  全局通用样式
+      module.css  模块化样式
+  - 移动端的适配 rem
+      不能用px，用相对单位rem html
+      不同设备上体验要一致
+      不同尺寸手机 等比例缩放
+      设计师设计稿 750px iphone4 375pt*2 = 750
+      小米 
+      css 一行代码  手机的不同尺寸 html font-size 等比例
+      layout
+      flexible.js 阿里 在任何设备上
+      1rem = 屏幕宽度/10
+- lib-flexible
+  阿里开源
+  设置html fontSize = window
+  innerWidth / 10
+  css px 宽度 = 手机设备宽度 = 375
+  1px = 2发光源
+  750px 设计稿
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 设计稿上一个盒子的大小
+  - 1像素不差的还原设计稿
+  - 设计稿中像素单位
+  - /75
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 项目亮点
+- 移动端适配
+  - lib-flexible  1rem = 屏幕宽度/10
+  - 设计稿 尺寸是iphone 标准尺寸 750px
+  - 前端的职责是还原设计稿
+  - 频繁的单位换算 260/75 换算
+  - 自动化？ 
+      postcss + postcss-pxtorem
+## git 提交规范
+- 项目初始化
+## 功能模块
+- 配置路由及懒加载
