@@ -12,39 +12,94 @@ import styles from './trip.module.css'
 import {
   Button,
   Input,
-  Loading
+  Loading,
+  Toast
 } from 'react-vant'
+import { ChatO, UserO } from '@react-vant/icons'
 
 const Trip = () => {  
   const [text, setText] = useState('')
   const [isSending, setIsSending] = useState(false)
-
-  const handleChat = () => {
-    if(text.trim()==='') return
+  // 数据驱动界面
+  // 静态界面
+  const [messages,setMessages] = useState([
+    {
+      id:1,
+      content:'hello,I am your assistant',
+      role:'assistant'
+    },
+    {
+      id:2,
+      content:'hello',
+      role:'user'
+    }
+  ])
+  const handleChat = async() => {
+    if(text.trim()==='') {
+      Toast.info('请输入消息')
+    }
     setIsSending(true)
+    setText('')
+    setMessages([
+      ...messages,
+      {
+        id:messages.length+1,
+        content:text,
+        role:'user'
+      }
+    ])
+    const newMessage = await openaiChat([{
+      role:'user',
+      content:text
+    }]);
+    setMessages((prev) => {
+      return [
+      ...prev,
+      newMessage.data
+      ]
+    })
+    setIsSending(false)
   }
 
   useTitle('旅游智能客服')
-  useEffect(()=>{
-    const fetchChat = async() => {
-      const res = await 
-      openaiChat([
-        {
-          role: 'user', 
-          content: '请给我推荐一个好地方'
-        },
+  // useEffect(()=>{
+  //   const fetchChat = async() => {
+  //     const res = await 
+  //     openaiChat([
+  //       {
+  //         role: 'user', 
+  //         content: '请给我推荐一个好地方'
+  //       },
         
-      ])
+  //     ])
     
-      console.log(res)
-    }
-    fetchChat()
-  },[])
+  //     console.log(res)
+  //   }
+  //   fetchChat()
+  // },[])
 
   return (
     <div className='flex flex-col h-all'>
       <div className={`${styles.chatArea} flex-1`}>
-        
+        {
+          messages.map((message,index) => (
+            <div 
+            key={index}
+            className={
+              message.role === 'user' ? 
+              styles.messageRight : 
+              styles.messageLeft
+            }
+            >
+              {
+                message.role === 'assistant' ? 
+                <ChatO /> :
+                <UserO />
+              }
+              {message.content}
+            </div>
+          ))
+        }
       </div>
       <div className={`flex ${styles.inputArea}`}>
         <Input
