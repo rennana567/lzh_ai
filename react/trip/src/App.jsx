@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom'
 import MainLayout from '@/components/MainLayout'
 import BlankLayout from '@/components/BlankLayout'
+import SwiperDemo from '@/components/Swiper'
 
 const Home = lazy(() => import('@/pages/Home'))
 const Search = lazy(() => import('@/pages/Search'))
@@ -23,6 +24,7 @@ function App() {
   const [value, setValue] = useState('');
   return (
     <>
+      <SwiperDemo />
       <Suspense fallback={<div>Loading...</div>}>
         {/* 带有tabbar的Layout */}
         <Routes>
