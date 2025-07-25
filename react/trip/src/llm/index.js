@@ -61,3 +61,34 @@ export const openaiChat = async (messages) => {
     )
     return res
 }
+
+export const generateAvatar = async (text) => { 
+    // 设计prompt
+    const prompt = `
+    Please create a 2D cartoon character avatar in the style of SpongeBob SquarePants based on the following user information:
+  
+User Nickname and Signature: ${text}
+
+
+Design Requirements:
+- Create an original cartoon character inspired by the user's nickname and signature
+- Style: Bright, colorful 2D animation similar to SpongeBob SquarePants
+- Character features:
+  * Large expressive anime-style eyes
+  * Simple yet cute facial design
+  * Round and soft body shapes
+  * Vivid color palette that reflects the user's personality
+  * Friendly and approachable expression
+  * Unique traits based on the nickname/signature (e.g., if nickname relates to fire, add flame elements)
+- Technical specifications:
+  * Front-facing view
+  * Clean white or transparent background
+  * Bold black outlines
+  * Optimized for avatar use (clear facial features even at small sizes)
+  * No text, watermarks, or additional elements
+  * High quality, detailed illustration
+- Overall feeling: Playful, energetic, and cartoonish like classic Nickelodeon style
+
+Important: Create an original character design, do not copy existing characters. Focus on translating the user's identity into a cute cartoon avatar.
+    `
+}

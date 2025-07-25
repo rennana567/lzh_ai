@@ -13,8 +13,11 @@ export const SwiperDemo = () => {
     </Swiper.Item>
   ));
   return (
-    <>
-    </>
+    <div className="demo-swiper">
+      <Swiper autoplay={5000} slideSize={80} trackOffset={10}>
+        {items}
+      </Swiper>
+    </div>
   );
 };
 
