@@ -30,7 +30,7 @@ const Account = () => {
   slogan: '保持优秀👍',
   avatar: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2F04a5f090-816d-44f8-ac92-09a58d3fb8c0%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1756039300&t=73dea4c6b60bd98a6759122046a424c9'
 })
-  const [showActionSheet, setShowActionSheet] = useState(true);
+  const [showActionSheet, setShowActionSheet] = useState(false);
   const handleAction = async (e) => {
     console.log(e);
     if(e.type === 1){

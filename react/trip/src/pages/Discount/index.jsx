@@ -1,8 +1,13 @@
+
+import styles from './discount.module.css';
+
+
+
 const Discount = () => {
-  return (
-    <div>
-      <h1>Discount</h1>
-    </div>
+  return(
+    <>
+      discount
+    </>
   )
 }
 

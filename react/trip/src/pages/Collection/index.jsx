@@ -1,9 +1,11 @@
+import { useState } from 'react';
+import styles from './collection.module.css';
+
 const Collection = () => {
   return (
-    <div>
-      <h1>Collection</h1>
-    </div>
+    <>
+      collection
+    </>
   )
 }
-
-export default Collection
+export default Collection;
