@@ -17,8 +17,10 @@ const Waterfall = (props) => {
             if (entry.isIntersecting && !loading) {
                 fetchMore()
             }
+            // observer.unobserve(entry.target)
         })
         if (loader.current) observer.observe(loader.current)
+        return () => observer.disconnect()
     }, [])
 
     return (

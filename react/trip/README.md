@@ -99,6 +99,7 @@ ReadMe.md 很重要 方便面试官
       postcss 是css预编译器，很强大
       vite自动读取postcss.config.js 将css文件编译
       px=>rem
+
 ## git 提交规范
 - 项目初始化
 ## 功能模块
@@ -126,6 +127,7 @@ ReadMe.md 很重要 方便面试官
   - api
     GoogleSuggest
   - localStorage
+
 - 瀑布流
   - 现代小红书等主流App的内容浏览用户体验产品
     两列、图片高度不一致、落差感
@@ -138,7 +140,20 @@ ReadMe.md 很重要 方便面试官
   数据驱动界面（2列） 奇偶
   - 加载更多 位于盒子底部的元素 通过使用IntersectionObserver
   观察它是否出现在视窗，性能更好，使用了观察者模式
+  组件卸载时，直接使用disconnect 释放资源，防止内存泄露
   - key  id 下拉刷新
+  - 使用IntersectionObserver 再次图片懒加载 data-src
+
+- toast 组件封装
+  - 需要自定义，UI组件库不满足需求
+  - UI props
+  - JS 显示出来 跨层级通信
+    观察者
+  - mitt eventBus 事件总线
+    - 实例化  mitt()
+    - on（自定义事件的名字，callback）
+    - emit（自定义事件的名字，参数）
+    组件通过监听一个自定义事件，实现基于事件的组件通信
 ## 项目亮点和难点
 - 前端智能
   - chat 函数
@@ -162,10 +177,17 @@ ReadMe.md 很重要 方便面试官
   - 热门推荐 + 相关商品（产品）
   - SPA
   - 骨架屏 不用让用户等待了
+
 ## 项目遇到过什么问题，怎么解决的
 - chat messages 覆盖问题
 - 闭包陷阱
   一次事件里面，两次setMessages()
+- 升级瀑布流？
+  - 骨架屏
+  - 奇偶images 两列分配可能有时会像天残脚一样
+      两个响应式数组，判断哪一列高度更少，将新得到的img加入哪个数组
+  - intersectionObserver 用到了两次，重复了，dry 原则 封装
+      hooks
 
 - 自定义Hooks
   - useTitle
