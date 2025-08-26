@@ -1,0 +1,49 @@
+<script>
+    const p1 = Promise.resolve('p1') // 返回一个Promise
+    const p2 = new Promise((resolve, reject) => (
+        setTimeout(() => {
+            resolve('p2 延时一秒')
+        }, 1000)
+    ))
+
+    const p3 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve('p3 延时两秒')
+        }, 2000)
+    })
+
+    const p4 = Promise.reject('p4 报错了')
+
+    const p5 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject('p5 rejected 延时一秒')
+        }, 1500)
+    })
+
+    // 并行
+    console.time('Promise.all 总耗时')
+    Promise.all([p1,p2,p3])
+      .then(res => {
+        console.log(res)
+        console.timeEnd('Promise.all 总耗时')
+      })
+      .catch(err => {
+        console.error(err)
+        console.timeEnd('Promise.all 总耗时')
+      })
+    //   Promise.all([p1,p3,p5])
+    //     .then(res => {
+    //         console.log(res)
+    //     })
+    //     .catch(err => {
+    //         console.error(err)
+    //     })
+
+    // Promise.all([p1, p4, p5])
+    //     .then(res => {
+    //         console.log(res)
+    //     })
+    //     .catch(err => {
+    //         console.error(err)
+    //     })
+</script>
