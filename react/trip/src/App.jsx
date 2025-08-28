@@ -21,6 +21,9 @@ const Collection = lazy(() => import('@/pages/Collection'))
 const Trip = lazy(() => import('@/pages/Trip'))
 const Account = lazy(() => import('@/pages/Account'))
 const Detail = lazy(() => import('@/pages/Detail'))
+const Coze = lazy(() => import('@/pages/Coze'))
+const Article= lazy(() => import('@/pages/Article'))
+const ArticleNew = lazy(() => import('@/pages/Article/ArticleNew'))
 
 function App() {
   const [value, setValue] = useState('');
@@ -45,6 +48,10 @@ function App() {
         <Route element={<BlankLayout />}>
           <Route path="/search" element={<Search />} />
           <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/coze" element={<Coze />}/>
+          <Route path='/article' element={<Article />}>
+              <Route path='/article:id' element={<ArticleNew />} />
+          </Route>
         </Route>
         </Routes>
       </Suspense>

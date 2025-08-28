@@ -177,7 +177,39 @@ ReadMe.md 很重要 方便面试官
   - 热门推荐 + 相关商品（产品）
   - SPA
   - 骨架屏 不用让用户等待了
-
+  - 文件上传的preview html5 FileReader对象
+- coze 工作流
+  - 智能生成图片
+    - 产品
+    冰球社群的宠物运动员 智能出图
+    社交属性
+    - 商业价值
+    技术服务
+    coze 工作流 智能编排AI 流程 编程一种
+    - api调用
+  - 设计工作流
+    - 创建工作流 ani_pic
+      上传宠物图片，生成宠物，冰球运动员照片
+    - 代码节点
+      参数校验和逻辑功能，返回运行的结果
+    - 图片生成流程
+      - 图片理解插件 计算机视觉
+      - 大模型 特征提取
+      prompt
+  - workflow_id=7533135151967567887
+  - token 
+  - coze 图片要先上传到coze中
+      uploadUrl + token +new FormData()
+      append(file)
+      拿到file_id
+  - workflowUrl + workflow_id + token
+      工作流需要的参数
+- 语音输入发表文章功能
+    - 字节的 tts
+    - onMouseDown
+    - BOW html5
+    navigator.mediaDevices.getUserMedia({audio:true})
+    用户隐私，要授权  getLocation
 ## 项目遇到过什么问题，怎么解决的
 - chat messages 覆盖问题
 - 闭包陷阱
@@ -216,3 +248,6 @@ ReadMe.md 很重要 方便面试官
     position: fixed;+ tlrb0 + margin: auto;
   - React.memo 无状态组件，不重新渲染
   - animation
+
+- AI 功能
+    智能前端（http 请求）+ 工作流 + coze api + ai 全新工作链路 + 自动化Agent

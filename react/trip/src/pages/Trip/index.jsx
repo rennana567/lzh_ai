@@ -61,6 +61,13 @@ const Trip = () => {
     setIsSending(false)
   }
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); 
+      handleChat(); // 执行提交逻辑
+    }
+  };
+
   useTitle('旅游智能客服')
   // useEffect(()=>{
   //   const fetchChat = async() => {
@@ -107,6 +114,7 @@ const Trip = () => {
           onChange={(value)=>setText(value)}
           placeholder='请输入消息'
           className={`${styles.input} flex-1`}
+          onKeyDown={handleKeyDown}
         />
         <Button disabled={isSending}  type='primary' onClick={handleChat}>发送</Button>
       </div>
