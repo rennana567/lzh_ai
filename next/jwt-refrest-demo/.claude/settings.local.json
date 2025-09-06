@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(D:\\lesson_si\\html5\\interview\\vite\\deep-webpack/**)",
+      "Read(D:\\lesson_si\\html5\\interview\\vite\\deep-webpack\\src/**)",
+      "Read(D:\\lesson_si\\html5\\interview\\vite\\deep-webpack\\src/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

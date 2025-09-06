@@ -129,3 +129,45 @@
     HashWorkerIn
     HashWorkerOut
     as 断言  
+    非空断言 !
+
+- useRef的高级使用场景
+    可变对象
+    - DOM对象
+    - 对象
+    - 值
+    AbortController 取消请求对象，推迟到上传再实例化
+    暂停的值也用ref 保存
+
+- es6 特性
+    - Set 已经上传的分片索引
+    - ?? 空值合并操作符
+    - Promise.all 并发
+    - Map 和 Set
+        大文件切片已上传索引的不重复
+
+- restful api
+    - uploadChunk  POST  /api/upload/chunk  url设计
+    - 自定义请求头
+    这里的 headers 通过自定义请求头传递元数据（文件哈希、分片序号），使服务端能在不解析请求体的情况下快速识别分片归属和顺序，提升处理效率和可扩展性。
+    解析请求头就可以判断是否已上传的chunk 更快
+
+## 项目难点
+- 分片上传的并发控制
+    Promise.all + 递归
+    并发限流的核心是：一开始只启动不超过 MAX_CONCURRENCY 个工人函数，每个工人执行完一个任务后会递归调用 next()，继续从队列取下一个任务，从而保证始终只有固定数量的工人在运行。这样既避免了同时创建过多 Promise 占用资源，又能充分利用并行度；等所有工人都把队列清空才 resolve，Promise.all 就能精确等待整个批次完成。
+
+## merge 的流程
+- fileHash 传入
+
+## 虚拟列表
+- 数据从何而来？
+    爬取一下
+- 怎么渲染列表
+    - 时间分片
+        setTimeout + requestAnimationFrame + createDocumentFragment
+    - 虚拟列表
+        按需加载
+    - 分页
+        滚动到底部加载更多
+        后端分页
