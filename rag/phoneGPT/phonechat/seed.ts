@@ -7,6 +7,24 @@ import {
     RecursiveCharacterTextSplitter
 } from 'langchain/text_splitter'
 import { createOpenAI } from "@ai-sdk/openai"
+import {
+    embed // 向量嵌入
+} from 'ai'
+import { createClient } from '@supabase/supabase-js'
+import {
+    config
+} from 'dotenv'
+config()
+
+const supabase = createClient(
+    process.env.SUPABASE_URL ?? "",
+    process.env.SUPABASE_KEY ?? ""
+)
+
+const openai = createOpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+    baseURL: process.env.OPENAI_API_BASE_URL
+})
 
 // supabase 去做向量化的知识库数据
 console.log('开始向量化知识库数据')
@@ -16,26 +34,44 @@ const splitter = new RecursiveCharacterTextSplitter({
 })
 const scrapePage = async (url: string): Promise<string> => {
     const loader = new PuppeteerWebBaseLoader(url, {
-      launchOptions: {
-        headless: true,
-      },
-      gotoOptions: {
-        waitUntil: 'networkidle0',
-      },
-      evaluate: async(page, browser) => {
-        const result = await page.evaluate(() => document.body.innerHTML);
-        await browser.close();
-        return result;
-      }
+        launchOptions: {
+            headless: true,
+        },
+        gotoOptions: {
+            waitUntil: 'networkidle0',
+        },
+        evaluate: async (page, browser) => {
+            const result = await page.evaluate(() => document.body.innerHTML);
+            await browser.close();
+            return result;
+        }
     });
-  
-    return await loader.scrape();
-  }
+
+    // gm 正则修饰符
+    // ^在[^] 表示不是 >中的字符
+    return (await loader.scrape()).replace(/<[^>]*>?/gm, '')
+}
 const loadData = async (webpages: string[]) => {
-    for (const url of webpages){
+    for (const url of webpages) {
         const content = await scrapePage(url);
         const chunks = await splitter.splitText(content);
-        console.log(chunks,'------')
+        // console.log(chunks,'------')
+        for (let chunk of chunks) {
+            const { embedding } = await embed({
+                model: openai.embedding('text-embedding-3-small'),
+                value: chunk
+            })
+            // console.log(embedding,'------')
+
+            const { error } = await supabase.from('chunks').insert({
+                content: chunk,
+                embedding: embedding,
+                url: url
+            })
+            if (error) {
+                console.error("Error inserting chunk")
+            }
+        }
     }
 }
 // 知识库的来源，可配置
@@ -46,4 +82,4 @@ loadData([
     // "https://en.wikipedia.org/wiki/IPhone_16_Pro",
     // "https://en.wikipedia.org/wiki/IPhone_15",
     // "https://en.wikipedia.org/wiki/IPhone_15_Pro",
-  ]);
+]);
