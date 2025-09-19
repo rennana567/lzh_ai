@@ -18,6 +18,8 @@
 ## 跨域
 - JSONP  script 标签 src 可以跨域 只能GET 请求
 - cors 服务器端设置响应头 Access-Control-Allow-Origin: *  可以跨域
+- webscoket 协议 全双工通信 服务器可以主动向客户端推送数据 客户端也可以主动向服务器发送数据
+  QQ  socket 协议  通信
 
 - 同源策略
   Same-Origin Policy 
